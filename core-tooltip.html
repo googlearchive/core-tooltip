@@ -200,7 +200,9 @@ You can customize this attribute with the `tipAttribute` attribute:
       },
       
       focusAction: function() {
-        this.focused = true;
+        if (!this.disabled) {
+          this.focused = true;
+        }
       },
 
       blurAction: function() {
