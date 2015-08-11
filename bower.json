@@ -3,12 +3,13 @@
   "private": true,
   "description": "Tooltip popup for content",
   "dependencies": {
-    "polymer": "Polymer/polymer#master",
-    "core-focusable": "Polymer/core-focusable#master",
-    "core-icon-button": "Polymer/core-icon-button#master",
-    "core-resizable": "Polymer/core-resizable#master"
+    "polymer": "Polymer/polymer#^0.5",
+    "core-focusable": "Polymer/core-focusable#^0.5",
+    "core-icon-button": "Polymer/core-icon-button#^0.5",
+    "core-resizable": "Polymer/core-resizable#^0.5"
   },
   "devDependencies": {
     "paper-fab": "Polymer/paper-fab#master"
-  }
+  },
+  "version": "0.5.7"
 }
