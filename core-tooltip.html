@@ -75,7 +75,7 @@ You can customize this attribute with the `tipAttribute` attribute:
 <!-- TODO: detect mobile and apply the .large class, instead of manual
            control. -->
 <!-- TODO: possibly reuse core-overlay. -->
-<polymer-element name="core-tooltip" attributes="noarrow position label show tipAttribute" role="tooltip" tabindex="0">
+<polymer-element name="core-tooltip" attributes="noarrow position label show tipAttribute" role="tooltip" tabindex="-1">
 <template>
   <link rel="stylesheet" href="core-tooltip.css">
 
@@ -152,6 +152,12 @@ You can customize this attribute with the `tipAttribute` attribute:
        */
       tipAttribute: 'tip',
 
+      ready: function() {
+        // Delegate focus/blur events
+        Polymer.addEventListener(this, 'focus', this.focusAction.bind(this), true);
+        Polymer.addEventListener(this, 'blur', this.blurAction.bind(this), true);
+      },
+
       attached: function() {
         this.updatedChildren();
         this.resizableAttachedHandler();
@@ -184,6 +190,23 @@ You can customize this attribute with the `tipAttribute` attribute:
 
       positionChanged: function(oldVal, newVal) {
         this.job('positionJob', this.setPosition);
+      },
+      
+      disabledChanged: function() {
+        this._disabledChanged();
+        if (!this.disabled) {
+          this.removeAttribute('tabindex');
+        }
+      },
+      
+      focusAction: function() {
+        if (!this.disabled) {
+          this.focused = true;
+        }
+      },
+
+      blurAction: function() {
+        this.focused = false;
       },
 
       setPosition: function() {
